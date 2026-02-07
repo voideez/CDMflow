@@ -91,7 +91,7 @@ Linux (для работы с путями и логами Fish)
 Клонируем проект:
 
 
-git clone https://github.com/voide/cmdflow.git
+git clone https://github.com/voideez/CMDflow.git
 cd cmdflow
 
 
