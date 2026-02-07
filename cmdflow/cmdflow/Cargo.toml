@@ -1,0 +1,10 @@
+[package]
+name = "cmdflow"
+version = "0.1.6"
+edition = "2024"
+license = "MIT"
+
+[dependencies]
+dirs = "6.0"
+colored = "2.0"
+
