@@ -50,7 +50,7 @@ cmdflow — это утилита для Linux, которая подсчиты�
 
 
     1. Через GitHub
-    git clone https://github.com/voideez/CDMflow.git
+    git clone https://github.com/voideez/cmdflow.git
     cd cmdflow
     cargo build --release
     mkdir -p ~/.local/bin
@@ -91,7 +91,7 @@ Linux (для работы с путями и логами Fish)
 Клонируем проект:
 
 
-git clone https://github.com/voideez/CMDflow.git
+git clone https://github.com/voideez/cmdflow.git
 cd cmdflow
 
 
