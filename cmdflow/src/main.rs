@@ -90,7 +90,7 @@ fn main() {
 
     // Вычисляем длину бара пропорционально
     let bar_len = ((count as f32 / max_count as f32) * 11.0).round() as usize;
-    let bar = "█".repeat(bar_len.max(1));
+    let bar = "███".repeat(bar_len.max(1));
 
     let line = format!("{:>5} │ {:<12} {}", count, cmd, bar);
 
