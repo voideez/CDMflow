@@ -55,7 +55,6 @@ cmdflow — это утилита для Linux, которая подсчиты�
     cargo build --release
     mkdir -p ~/.local/bin
     ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
-    hash -r    # сброс кеша терминала
 
 
     Теперь команда cmdflow доступна в любом терминале:
