@@ -50,17 +50,26 @@ cmdflow — это утилита для Linux, которая подсчиты�
 
 🔹 Установка
 
-Через GitHub:
-
-
-```bash
-git clone https://github.com/voide/cmdflow.git
-cd cmdflow
-cargo build --release
-mkdir -p ~/.local/bin
-ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
-hash -r    # сброс кеша терминала
-```
+   Через GitHub:
+   
+   
+   ```bash
+   git clone https://github.com/voide/cmdflow.git
+   cd cmdflow
+   cargo build --release
+   mkdir -p ~/.local/bin
+   ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
+   hash -r    # сброс кеша терминала
+   ```
+   
+   
+   Через AUR (релиз будет после 08/02/26):
+   
+   Если установлен yay:
+   
+   ```bash
+   yay -S cmdflow
+   ```
 
 
 Теперь команда cmdflow доступна в любом терминале:
@@ -75,16 +84,7 @@ cmdflow 15       # top 15 (fish + bash)
 --working        # only working commands
 --broken         # only unworking commands
 ```
-
-
-Через AUR (релиз будет после 08/02/26):
-
-Если установлен yay:
-
-```bash
-yay -S cmdflow
-```
-
+   
 
 Будет собрана свежая версия проекта через Cargo.
 
