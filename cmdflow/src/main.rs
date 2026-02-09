@@ -1,109 +1,188 @@
-use std::collections::{HashMap, HashSet};
-use std::fs::{OpenOptions, read_to_string};
+use std::collections::HashMap;
+use std::fs::{self, read_to_string, OpenOptions};
 use std::io::Write;
-use std::path::PathBuf;
-use colored::*;
 use std::env;
+use std::process::Command;
+use colored::*;
+
+fn read_log(path: &std::path::Path) -> Vec<String> {
+    read_to_string(path)
+        .map(|content| content
+            .lines()
+            .map(|l| l.trim())
+            .filter(|l| !l.is_empty())
+            .map(|l| l.to_lowercase())
+            .collect())
+        .unwrap_or_default()
+}
+
+fn rebuild_log(src: &std::path::Path, dst: &std::path::Path, is_fish: bool) {
+    if !src.exists() { return; }
+
+    let mut log_file = OpenOptions::new()
+        .create(true)
+        .write(true)
+        .open(dst)
+        .unwrap();
+
+    if let Ok(content) = read_to_string(src) {
+        for line in content.lines() {
+            let cmd = if is_fish {
+                line.strip_prefix("- cmd: ").map(str::trim)
+            } else {
+                let l = line.trim();
+                if l.is_empty() || l.starts_with('#') { None } else { Some(l) }
+            };
+
+            if let Some(cmd) = cmd {
+                let _ = writeln!(log_file, "{}", cmd);
+            }
+        }
+    }
+}
+
+fn is_working(cmd: &str) -> bool {
+    Command::new("sh")
+        .arg("-c")
+        .arg(format!("command -v {}", cmd))
+        .output()
+        .map(|o| o.status.success())
+        .unwrap_or(false)
+}
+
+fn print_top(title: &str, data: &[(String, usize)], top_n: usize) {
+    let soft_rainbow = [
+        (200,150,255),(180,180,255),(150,220,255),
+        (150,255,200),(180,255,150),(220,255,150),
+        (255,220,150),(255,180,150),(255,150,180),
+    ];
+
+    let max_cmd_len = 12;
+    let max_bar_len = 20;
+    let max_count = data.get(0).map(|x| x.1).unwrap_or(1).max(1);
+
+    println!("{}", format!("{}", title).bold().underline());
+
+    for (i, (cmd, count)) in data.iter().take(top_n).enumerate() {
+        let display_cmd = if cmd.len() > max_cmd_len {
+            format!("{}…", &cmd[..max_cmd_len-1])
+        } else { cmd.clone() };
+
+        let bar_len = ((*count as f32 / max_count as f32) * max_bar_len as f32).round() as usize;
+        let bar = "█".repeat(bar_len.max(1));
+
+        let line = format!("{:>5} │ {:<12} {}", count, display_cmd, bar);
+
+        let out = match i {
+            0 => line.truecolor(255,215,0).bold(),
+            1 => line.truecolor(192,192,192).bold(),
+            2 => line.truecolor(205,127,50).bold(),
+            _ => {
+                let c = soft_rainbow[(i - 3) % soft_rainbow.len()];
+                line.truecolor(c.0, c.1, c.2)
+            }
+        };
+        println!("{}", out);
+    }
+
+    println!();
+}
 
 fn main() {
+    let args: Vec<String> = env::args().skip(1).collect();
 
-    let args: Vec<String> = env::args().collect();
+    if args.iter().any(|a| a == "--help") {
+        println!("Usage:");
+        println!("  --fish       Read only fish commands");
+        println!("  --bash       Read only bash commands");
+        println!("  --working    Show top N working commands");
+        println!("  --broken     Show top N broken commands");
+        println!("  --version    Show program version");
+        println!("  --help       Show this help message");
+        return;
+    }
 
-    // ---------- --version ----------
-    if args.iter().any(|x| x == "--version") {
+    if args.iter().any(|a| a == "--version") {
         println!("cmdflow v{}", env!("CARGO_PKG_VERSION"));
         return;
     }
 
-    let top_n: usize = if args.len() > 1 {
-        args[1].parse().unwrap_or(10)
-    } else {
-        10
+    let has_fish = args.contains(&"--fish".to_string());
+    let has_bash = args.contains(&"--bash".to_string());
+    let use_fish = has_fish || (!has_fish && !has_bash);
+    let use_bash = has_bash || (!has_fish && !has_bash);
+
+    let top_n: usize = args.iter().filter_map(|a| a.parse::<usize>().ok()).next().unwrap_or(10);
+
+    let home = match dirs::home_dir() {
+        Some(h) => h,
+        None => { eprintln!("Could not determine home directory."); return; }
     };
 
-    let _max_bar_len: usize = 20; // Максимальная длина бара
+    let fish_history = home.join(".local/share/fish/fish_history");
+    let bash_history = home.join(".bash_history");
+    let cmdflow_dir = home.join(".local/share/cmdflow");
+    let fish_log = cmdflow_dir.join("fish.log");
+    let bash_log = cmdflow_dir.join("bash.log");
 
-
-    let cmdflow_log: PathBuf = dirs::home_dir().unwrap().join(".local/share/cmdflow/log");
-    let fish_history: PathBuf = dirs::home_dir().unwrap().join(".local/share/fish/fish_history");
-
-    // ---------- Автокешинг ----------
-    let mut existing_cmds = HashSet::new();
-    if let Ok(existing_log) = read_to_string(&cmdflow_log) {
-        for line in existing_log.lines() {
-            existing_cmds.insert(line.trim().to_string());
-        }
-    }
-
-    let mut log_file = OpenOptions::new()
-        .create(true)
-        .append(true)
-        .open(&cmdflow_log)
-        .unwrap();
-
-    if let Ok(content) = read_to_string(&fish_history) {
-        for line in content.lines() {
-            if line.starts_with("- cmd: ") {
-                let cmd_full = line[7..].trim();
-                if !existing_cmds.contains(cmd_full) {
-                    writeln!(log_file, "{}", cmd_full).unwrap();
-                    existing_cmds.insert(cmd_full.to_string());
-                }
-            }
-        }
-    }
-
-    // ---------- Подсчёт ----------
-    let mut counter = HashMap::new();
-    if let Ok(content) = read_to_string(&cmdflow_log) {
-        for line in content.lines() {
-            let cmd = line.split_whitespace().next().unwrap_or("").to_lowercase();
-            if !cmd.is_empty() {
-                *counter.entry(cmd).or_insert(0) += 1;
-            }
-        }
-    }
-
-    if counter.is_empty() {
-        println!("Empty Log. Try to run some commands in Fish shell.");
+    if let Err(_) = fs::create_dir_all(&cmdflow_dir) {
+        eprintln!("Failed to create cmdflow directory");
         return;
     }
 
-    let mut vec: Vec<_> = counter.into_iter().collect();
-    vec.sort_by(|a, b| b.1.cmp(&a.1));
-    let max_count = vec.get(0).map(|(_, c)| *c).unwrap_or(1);
+    let _ = fs::remove_file(&fish_log);
+    let _ = fs::remove_file(&bash_log);
 
-    println!("{}", format!("Top {} command Fish:", top_n).bold().underline());
+    if use_fish { rebuild_log(&fish_history, &fish_log, true); }
+    if use_bash { rebuild_log(&bash_history, &bash_log, false); }
 
-    // ---------- Мягкая радужная аллея ----------
-    let soft_rainbow = [
-        (200, 150, 255), (180, 180, 255), (150, 220, 255),
-        (150, 255, 200), (180, 255, 150), (220, 255, 150),
-        (255, 220, 150), (255, 180, 150), (255, 150, 180),
-    ];
+    // ---------- Считаем команды ----------
+    let mut counter: HashMap<String, usize> = HashMap::new();
+    let mut combined_logs = vec![];
+    if use_fish && fish_log.exists() { combined_logs.extend(read_log(&fish_log)); }
+    if use_bash && bash_log.exists() { combined_logs.extend(read_log(&bash_log)); }
 
-    for (i, (cmd, count)) in vec.into_iter().take(top_n).enumerate() {
-    // Пропускаем команды с именем длиннее 11 символов
-    if cmd.len() > 11 {
-        continue;
+    for line in combined_logs {
+        let line = line.trim().to_lowercase();
+        if line.is_empty() { continue; }
+
+        let key = line.split_whitespace().next().unwrap();
+        if !key.chars().next().unwrap().is_alphanumeric() { continue; }
+
+        *counter.entry(key.to_string()).or_insert(0) += 1;
     }
 
-    // Вычисляем длину бара пропорционально
-    let bar_len = ((count as f32 / max_count as f32) * 11.0).round() as usize;
-    let bar = "███".repeat(bar_len.max(1));
+    if counter.is_empty() {
+        println!("No commands found for the selected shell(s).");
+        return;
+    }
 
-    let line = format!("{:>5} │ {:<12} {}", count, cmd, bar);
+    // ---------- Подготовка данных ----------
+    let mut vec_main: Vec<_> = counter.iter().map(|(cmd, &c)| (cmd.clone(), c)).collect();
 
-    let colored_line = match i {
-        0 => line.truecolor(255, 215, 0).bold(),      // золото
-        1 => line.truecolor(192, 192, 192).bold(),    // серебро
-        2 => line.truecolor(205, 127, 50).bold(),     // бронза
-        _ => {
-            let color = soft_rainbow[(i - 3) % soft_rainbow.len()];
-            line.truecolor(color.0, color.1, color.2)
-        }
+    // Фильтруем по рабочим/нерабочим, если аргумент есть
+    if args.contains(&"--working".to_string()) {
+        vec_main = vec_main.into_iter().filter(|(cmd, _)| is_working(cmd)).collect();
+    } else if args.contains(&"--broken".to_string()) {
+        vec_main = vec_main.into_iter().filter(|(cmd, _)| !is_working(cmd)).collect();
+    }
+
+    vec_main.sort_by(|a, b| b.1.cmp(&a.1));
+
+    let mode = match (use_fish, use_bash) {
+        (true, true) => "fish + bash",
+        (true, false) => "fish",
+        (false, true) => "bash",
+        _ => "unknown",
     };
 
-    println!("{}", colored_line);
-    }
+    let arg_label = if args.contains(&"--working".to_string()) {
+        "Working Commands"
+    } else if args.contains(&"--broken".to_string()) {
+        "Broken Commands"
+    } else {
+        "Commands"
+    };
+
+    print_top(&format!("Top {} {} ({})", top_n, arg_label, mode), &vec_main, top_n);
 }
