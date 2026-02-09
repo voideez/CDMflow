@@ -24,7 +24,7 @@ A colorful Fish command tracker with rainbow top visualization 🌈
 
 **Пример вывода Top 100 Working Commands (fish):**
 
-`
+```text
  107 │ sudo         ████████████████████
   47 │ cmdflow      █████████
   35 │ git          ███████
@@ -40,7 +40,7 @@ A colorful Fish command tracker with rainbow top visualization 🌈
   12 │ fastfetch    ██
   11 │ echo         ██
    8 │ yay          █
-`
+```
 
 ---
 
