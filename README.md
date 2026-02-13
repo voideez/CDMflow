@@ -24,7 +24,8 @@ A colorful Fish command tracker with rainbow top visualization 🌈
 
 **Пример вывода cmdflow:**
 
-!(output.png)
+![](output.png)
+
 
 ---
 
