@@ -72,7 +72,7 @@ yay -S cmdflow
 - Rust и Cargo  
 - Fish shell  
 - Bash shell
-- Linux (для работы с путями и логами Fish/Bash)
+- Linux-based distro
 
 ---
 
