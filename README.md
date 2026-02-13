@@ -39,7 +39,6 @@ cd cmdflow
 cargo build --release
 mkdir -p ~/.local/bin
 ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
-hash -r    # сброс кеша терминала
 ```
 
 Теперь команда `cmdflow` доступна в любом терминале:
@@ -54,7 +53,7 @@ cmdflow 15       # top 15 (fish + bash)
 --broken         # only unworking commands
 ```
 
-**Через AUR (релиз будет после 08/02/26):**
+**Через AUR:**
 
 Если установлен `yay`:
 
