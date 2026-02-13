@@ -34,7 +34,7 @@ A colorful Fish command tracker with rainbow top visualization 🌈
 **Через GitHub:**
 
 ```bash
-git clone https://github.com/voide/cmdflow.git
+git clone https://github.com/voideez/cmdflow.git
 cd cmdflow
 cargo build --release
 mkdir -p ~/.local/bin
@@ -45,10 +45,10 @@ ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
 
 ```bash
 cmdflow          # fish + bash
---fish            # только fish
---bash            # только bash
+--fish           # только fish
+--bash           # только bash
 cmdflow 15       # top 15 (fish + bash)
---fish 20
+--fish 20        # top 20 (only fish)
 --working        # only working commands
 --broken         # only unworking commands
 ```
@@ -69,7 +69,7 @@ yay -S cmdflow
 
 ### 🔹 Требования
 
-- Rust и Cargo  
+- Rust + Cargo  
 - Fish shell  
 - Bash shell
 - Linux-based distro
