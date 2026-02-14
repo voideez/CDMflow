@@ -1,6 +1,6 @@
 [package]
 name = "cmdflow"
-version = "0.2.6"
+version = "1.3.2"
 edition = "2024"
 license = "MIT"
 
