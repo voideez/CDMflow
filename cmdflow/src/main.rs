@@ -61,7 +61,7 @@ fn print_top(title: &str, data: &[(String, usize)], top_n: usize) {
     let max_bar_len = 20;
     let max_count = data.get(0).map(|x| x.1).unwrap_or(1).max(1);
 
-    println!("{}", format!("{}", title).bold().underline());
+    println!("{}", title.bold().underline());
 
     for (i, (cmd, count)) in data.iter().take(top_n).enumerate() {
         let display_cmd = if cmd.len() > max_cmd_len {
@@ -73,16 +73,9 @@ fn print_top(title: &str, data: &[(String, usize)], top_n: usize) {
 
         let line = format!("{:>5} │ {:<12} {}", count, display_cmd, bar);
 
-        let out = match i {
-            0 => line.truecolor(255,215,0).bold(),
-            1 => line.truecolor(192,192,192).bold(),
-            2 => line.truecolor(205,127,50).bold(),
-            _ => {
-                let c = soft_rainbow[(i - 3) % soft_rainbow.len()];
-                line.truecolor(c.0, c.1, c.2)
-            }
-        };
-        println!("{}", out);
+        // Радужная палитра по строкам
+        let c = soft_rainbow[i % soft_rainbow.len()];
+        println!("{}", line.truecolor(c.0, c.1, c.2));
     }
 
     println!();
