@@ -35,7 +35,7 @@ A colorful Fish command tracker with rainbow top visualization 🌈
 
 ```bash
 git clone https://github.com/voideez/cmdflow.git
-cd cmdflow
+cd cmdflow/cmdflow
 cargo build --release
 mkdir -p ~/.local/bin
 ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
