@@ -1,6 +1,6 @@
 <p align="center">
 
-<h1>CMDflow</h1>
+<h1 align="center">CMDflow</h1>
 
   <img src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github-actions" alt="Build">
   <img src="https://img.shields.io/badge/Language-Rust%201.93.1-white?style=for-the-badge&logo=rust" alt="Language Rust">
