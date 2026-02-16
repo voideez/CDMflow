@@ -96,7 +96,7 @@ fn main() {
     }
 
     if args.iter().any(|a| a == "--version") {
-        println!("cmdflow 2.3.6));
+        println!("cmdflow 2.3.6);
         return;
     }
 
