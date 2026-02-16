@@ -1,5 +1,13 @@
 # CMDFLOW
 
+<p align="center">
+  <img src="https://img.shields.io/badge/language-Rust%202024-orange" alt="Language Rust">
+  <img src="https://img.shields.io/badge/version-1.3.2-green" alt="Version">
+  <img src="https://img.shields.io/badge/OS-Linux--based-blue" alt="OS">
+  <img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="License">
+  <img src="https://github.com/voideez/cmdflow/actions/workflows/rust.yml/badge.svg" alt="Build passing">
+</p>
+
 A colorful Fish command tracker with rainbow top visualization 🌈
 
 `cmdflow` — это утилита для Linux, которая подсчитывает ваши команды Fish/Bash, создаёт топ-N команд и выводит его в терминал.
