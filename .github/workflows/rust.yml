@@ -22,4 +22,5 @@ jobs:
           override: true
 
       - name: Build project
+        working-directory: cmdflow/cmdflow
         run: cargo build --verbose
