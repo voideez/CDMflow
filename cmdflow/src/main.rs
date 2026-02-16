@@ -96,7 +96,7 @@ fn main() {
     }
 
     if args.iter().any(|a| a == "--version") {
-        println!("cmdflow v{}", env!("CARGO_PKG_VERSION"));
+        println!("cmdflow 2.3.6));
         return;
     }
 
