@@ -1,7 +1,7 @@
 # CMDFLOW
 
 <p align="center">
-<img src="https://github.com/voideez/cmdflow/actions/workflows/rust.yml/badge.svg?branch=main&style=for-the-badge" alt="Build passing">
+[<img src="https://github.com/voideez/cmdflow/actions/workflows/rust.yml/badge.svg?branch=main&style=for-the-badge" alt="Build passing">](https://github.com/voideez/cmdflow/actions/workflows/rust.yml/badge.svg?branch=project&style=for-the-badge)
   <img src="https://img.shields.io/badge/Language-Rust%202024-white?style=for-the-badge&logo=rust" alt="Language Rust">
   <img src="https://img.shields.io/badge/Version-1.3.2-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/OS-Linux--based-orange?style=for-the-badge&logo=linux" alt="OS">
