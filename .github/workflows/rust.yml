@@ -1,4 +1,4 @@
-name: Build
+name: Rust Build
 
 on:
   push:
@@ -24,3 +24,19 @@ jobs:
       - name: Build project
         working-directory: cmdflow
         run: cargo build --verbose
+        env:
+          CARGO_TERM_COLOR: always
+          CARGO_TERM_PROGRESS_WIDTH: 50
+          CARGO_TERM_PROGRESS_UNICODE: true
+
+      - name: Set Build Status Badge
+        id: badge
+        run: |
+          STATUS="passing"
+          if [ "${{ job.status }}" != "success" ]; then
+            STATUS="failing"
+          fi
+          echo "BADGE_URL=https://img.shields.io/badge/build-$STATUS-brightgreen?style=for-the-badge" >> $GITHUB_ENV
+
+      - name: Show Badge URL
+        run: echo "Badge URL: $BADGE_URL"
