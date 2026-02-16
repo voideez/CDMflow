@@ -1,7 +1,7 @@
-<p alignh = "center"> # CMDFLOW </p>
+# CMDFLOW
 
 <p align="center">
-  <img src="(https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)" alt="Build Passing">
+  ![Build](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)
   <img src="https://img.shields.io/badge/Language-Rust%202024-white?style=for-the-badge&logo=rust" alt="Language Rust">
   <img src="https://img.shields.io/badge/Version-1.3.2-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/OS-Linux--based-orange?style=for-the-badge&logo=linux" alt="OS">
