@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github-actions" alt="Build">
   <img src="https://img.shields.io/badge/Language-Rust%201.93.1-white?style=for-the-badge&logo=rust" alt="Language Rust">
-  <img src="https://img.shields.io/badge/Version-1.3.2-blue?style=for-the-badge&logo=github" alt="Version">
+  <img src="https://img.shields.io/badge/Version-2.3.6-blue?style=for-the-badge&logo=github" alt="Version">
   <img src="https://img.shields.io/badge/OS-Linux--based-orange?style=for-the-badge&logo=linux" alt="OS">
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge&logo=opensourcehardware" alt="License">
 </p>
