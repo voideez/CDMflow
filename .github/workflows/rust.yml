@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ "project" ]
+    branches: ["project"]
   pull_request:
-    branches: [ "project" ]
+    branches: ["project"]
 
 jobs:
   build:
@@ -21,6 +21,14 @@ jobs:
           profile: minimal
           override: true
 
-      - name: Build project
+      - name: Build cmdflow
         working-directory: cmdflow
         run: cargo build --verbose
+
+      - name: Run tests (optional)
+        working-directory: cmdflow
+        run: cargo test --verbose
+
+      - name: Check cmdflow runs
+        working-directory: cmdflow
+        run: ./target/debug/cmdflow --version
