@@ -92,11 +92,12 @@ fn main() {
         println!("  --broken     Show top N broken commands");
         println!("  --version    Show program version");
         println!("  --help       Show this help message");
+        println!("  --version    Show project version")
         return;
     }
 
     if args.iter().any(|a| a == "--version") {
-        println!("cmdflow v{}", env!("CARGO_PKG_VERSION"));
+        println!("cmdflow v2.3.6");
         return;
     }
 
