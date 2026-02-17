@@ -92,7 +92,6 @@ fn main() {
         println!("  --broken     Show top N broken commands");
         println!("  --version    Show program version");
         println!("  --help       Show this help message");
-        println!("  --version    Show project version");
         return;
     }
 
