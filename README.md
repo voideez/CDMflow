@@ -1,4 +1,4 @@
-<h1 align="center">CMDflow</h1>
+<h1 align="center">CMDflow🌈</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github-actions" alt="Build">
