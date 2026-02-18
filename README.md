@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge&logo=opensourcehardware" alt="License">
 </p>
 
-A colorful Fish command tracker with rainbow top visualization 🌈
+A colorful Fish command tracker with rainbow top visualization 
 
 `CMDflow` — это утилита для Linux, которая подсчитывает ваши команды Fish/Bash, создаёт топ-N команд и выводит его в терминал.
 
