@@ -1,13 +1,16 @@
-name: Build
+name: Build and Release
 
 on:
   push:
     branches: ["project"]
+    tags:
+      - 'v*' # Сработает, когда ты создаешь тег версии (например, v2.3.6)
   pull_request:
     branches: ["project"]
 
 jobs:
   build:
+    name: Build Asset
     runs-on: ubuntu-latest
 
     steps:
@@ -15,20 +18,33 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
+        uses: dtolnay/rust-toolchain@stable # Современный и поддерживаемый экшен для Rust
 
       - name: Build cmdflow
         working-directory: cmdflow
-        run: cargo build --verbose
+        run: cargo build --release --verbose # Собираем оптимизированный бинарник
 
-      - name: Run tests (optional)
+      - name: Run tests
         working-directory: cmdflow
         run: cargo test --verbose
 
       - name: Check cmdflow runs
         working-directory: cmdflow
-        run: ./target/debug/cmdflow --version
+        run: ./target/release/cmdflow --version # Проверяем именно релизную версию
+
+      # Шаг переименования, чтобы пользователю качался файл с понятным именем
+      # Выполняется только если мы пушим ТЕГ
+       Kak-to-tak:
+      - name: Prepare asset
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cp cmdflow/target/release/cmdflow ./cmdflow-linux-x86_64
+
+      # Автоматическая заливка в GitHub Releases (только при пуше ТЕГА)
+      - name: Upload to Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: cmdflow-linux-x86_64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Этот токен GitHub создаёт сам, ничего настраивать не нужно
