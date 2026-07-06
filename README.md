@@ -101,5 +101,5 @@ cargo run
 ```bash
 cargo build
 ln -sf "$(pwd)/target/debug/cmdflow" ~/.local/bin/cmdflow
-cmdflow 10
+cmdflow
 ```
