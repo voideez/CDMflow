@@ -56,7 +56,7 @@ cmdflow          # top 10 (fish + bash)
 cmdflow 15       # top 15 (fish + bash)
 --fish 20        # top 20 (only fish)
 --working        # only working commands
---broken         # only unworking commands
+--broken         # only non-working commands
 ```
 
 **Через AUR:**
@@ -85,7 +85,7 @@ yay -S cmdflow
 Клонируем проект:
 
 ```bash
-git clone https://github.com/voide/cmdflow.git
+git clone https://github.com/voideez/cmdflow.git
 cd cmdflow/cmdflow
 ```
 
