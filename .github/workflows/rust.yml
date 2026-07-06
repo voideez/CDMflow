@@ -8,6 +8,10 @@ on:
   pull_request:
     branches: ["project"]
 
+# ВОТ ЭТОТ БЛОК НАДО ДОБАВИТЬ:
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Asset
