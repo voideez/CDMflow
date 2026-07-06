@@ -18,11 +18,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Rust
-        uses: dtolnay/rust-toolchain@stable 
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Build cmdflow
         working-directory: cmdflow
-        run: cargo build --release --verbose 
+        run: cargo build --release --verbose
 
       - name: Run tests
         working-directory: cmdflow
@@ -30,9 +30,8 @@ jobs:
 
       - name: Check cmdflow runs
         working-directory: cmdflow
-        run: ./target/release/cmdflow --version 
+        run: ./target/release/cmdflow --version
 
-       Kak-to-tak:
       - name: Prepare asset
         if: startsWith(github.ref, 'refs/tags/')
         run: |
@@ -44,4 +43,4 @@ jobs:
         with:
           files: cmdflow-linux-x86_64
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
