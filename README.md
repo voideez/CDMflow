@@ -76,7 +76,6 @@ yay -S cmdflow
 - Rust + Cargo  
 - Fish shell  
 - Bash shell
-- Linux-based distro
 
 ---
 
