@@ -30,7 +30,7 @@ A colorful Fish command tracker with rainbow top visualization
 
 **Пример вывода `cmdflow --working 50`:**
 
-![](https://raw.githubusercontent.com/voideez/cmdflow/main/assets/preview.png)
+![](/img/preview.png)
 
 
 ---
