@@ -1,4 +1,4 @@
-<h1 align="center">CMDflow🌈</h1>
+<h1 align="center">cmdflow🌈</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github-actions" alt="Build">
@@ -10,9 +10,9 @@
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge&logo=opensourcehardware" alt="License">
 </p>
 
-A colorful Fish command tracker with rainbow top visualization 
+A colorful Fish/Bash/Zsh command tracker with rainbow top visualization 
 
-`CMDflow` — это утилита для Linux, которая подсчитывает ваши команды Fish/Bash, создаёт топ-N команд и выводит его в терминал.
+`cmdflow` — это утилита для Linux, которая подсчитывает ваши команды Fish/Bash/Zsh, создаёт топ-N команд и выводит его в терминал.
 
 - Автокеширование команд при каждом запуске  
 - Поддержка старых и новых команд  
@@ -32,10 +32,20 @@ A colorful Fish command tracker with rainbow top visualization
 
 ![](/img/output.png)
 
+---
+⚠️ Важное примечание по поводу дубликатов команд
 
+По умолчанию большинство шеллов (особенно Fish и Bash) используют режим ignoredups. Это значит, что если ты введешь команду fastfetch 5 раз подряд, в историю запишется только один вызов.
+
+Чтобы графики в cmdflow отражали 100% реальную картину твоей активности, запусти встроенный фиксер конфигурации:
+Bash
+
+``cmdflow --fix-history``
+
+Эта команда безопасно допишет необходимые хуки в твои файлы ~/.bashrc и ~/.config/fish/config.fish, заставив их сохранять абсолютно каждый ввод. Удачи.
 ---
 
-### 🔹 Установка
+###   Установка
 
 **Через GitHub:**
 
@@ -45,18 +55,6 @@ cd cmdflow/cmdflow
 cargo build --release
 mkdir -p ~/.local/bin
 ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
-```
-
-Теперь команда `cmdflow` доступна в любом терминале:
-
-```bash
-cmdflow          # top 10 (fish + bash)
---fish           # только fish
---bash           # только bash
-cmdflow 15       # top 15 (fish + bash)
---fish 20        # top 20 (only fish)
---working        # only working commands
---broken         # only non-working commands
 ```
 
 **Через AUR:**
@@ -71,15 +69,31 @@ yay -S cmdflow
 
 ---
 
-### 🔹 Требования
+Теперь команда `cmdflow` доступна в любом терминале:
 
-- Rust + Cargo  
+```bash
+cmdflow          # top 10 (fish + bash)
+--fish           # only fish
+--bash           # only bash
+--zsh            # only zsh
+cmdflow 15       # top 15 (fish + bash)
+--fish 20        # top 20 (only fish)
+--working        # only working commands
+--broken         # only non-working commands
+--fix-history    # history fix
+```
+---
+
+###   Требования
+
+- Cargo  
 - Fish shell  
 - Bash shell
+- Zsh shell
 
 ---
 
-### 🔹 Разработка
+###   Разработка
 
 Клонируем проект:
 
