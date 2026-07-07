@@ -52,7 +52,7 @@ Bash
 
 ```bash
 git clone https://github.com/voideez/cmdflow.git
-cd cmdflow/cmdflow
+cd cmdflow
 cargo build --release
 mkdir -p ~/.local/bin
 ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
@@ -100,7 +100,7 @@ cmdflow 15       # top 15 (fish + bash)
 
 ```bash
 git clone https://github.com/voideez/cmdflow.git
-cd cmdflow/cmdflow
+cd cmdflow
 ```
 
 Сборка и запуск в режиме разработки:
