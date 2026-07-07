@@ -24,21 +24,18 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Build cmdflow
-        working-directory: cmdflow
         run: cargo build --release --verbose
 
       - name: Run tests
-        working-directory: cmdflow
         run: cargo test --verbose
 
       - name: Check cmdflow runs
-        working-directory: cmdflow
         run: ./target/release/cmdflow --version
 
       - name: Prepare asset
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          cp cmdflow/target/release/cmdflow ./cmdflow-linux-x86_64
+          cp ./target/release/cmdflow ./cmdflow-linux-x86_64
 
       - name: Upload to Release
         if: startsWith(github.ref, 'refs/tags/')
