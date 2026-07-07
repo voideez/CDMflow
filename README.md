@@ -21,7 +21,7 @@ A colorful Fish/Bash/Zsh command tracker with rainbow top visualization
 
 ---
 
-### 🔹 Функционал
+###   Функционал
 
 - Считает все введённые команды Fish и Bash, включая их повторы  
 - Берёт только первые аргументы команд (например, `cargo build` → `cargo`)  
