@@ -38,7 +38,6 @@ A colorful Fish/Bash/Zsh command tracker with rainbow top visualization
 По умолчанию большинство шеллов (особенно Fish и Bash) используют режим ignoredups. Это значит, что если вы введете команду fastfetch 5 раз подряд, в историю запишется только один вызов.
 
 Чтобы графики в cmdflow отражали 100% реальную картину вашей активности, запустите встроенный фиксер конфигурации:
-Bash
 
 ``cmdflow --fix-history``
 
