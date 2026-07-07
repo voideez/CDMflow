@@ -30,7 +30,7 @@ A colorful Fish/Bash/Zsh command tracker with rainbow top visualization
 
 **Пример вывода `cmdflow --working 50`:**
 
-![](/img/output.png)
+![](img/output.png)
 
 ---
 ⚠️ Важное примечание по поводу дубликатов команд
