@@ -15,7 +15,7 @@
         # Сборка пакета через `nix build`
         packages.default = pkgs.rustPlatform.buildRustPackage {
           pname = "cmdflow";
-          version = "2.3.6";
+          version = "3.0.0";
 
           src = ./.;
 
