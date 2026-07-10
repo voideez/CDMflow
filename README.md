@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github-actions" alt="Build">
   <img src="https://img.shields.io/github/repo-size/voideez/cmdflow?style=for-the-badge&logo=gitlab" alt="Repo Size">
   <img src="https://img.shields.io/github/last-commit/voideez/cmdflow?style=for-the-badge&logo=git" alt="Last Commit">
-  <img src="https://img.shields.io/badge/Language-Rust%201.93.1-white?style=for-the-badge&logo=rust" alt="Language Rust">
+  <img src="https://img.shields.io/badge/Language-Rust%201.97.0-white?style=for-the-badge&logo=rust" alt="Language Rust">
   <img src="https://img.shields.io/badge/Version-3.0.0-blue?style=for-the-badge&logo=github" alt="Version">
   <img src="https://img.shields.io/badge/OS-Unix--like-orange?style=for-the-badge&logo=linux" alt="OS">
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge&logo=opensourcehardware" alt="License">
