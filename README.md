@@ -71,11 +71,11 @@ ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
 Теперь команда `cmdflow` доступна в любом терминале:
 
 ```bash
-cmdflow          # top 10 (fish + bash)
+cmdflow          # top 10 (fish + bash + zsh)
 --fish           # only fish
 --bash           # only bash
 --zsh            # only zsh
-cmdflow 15       # top 15 (fish + bash)
+cmdflow 15       # top 15 (fish + bash + zsh)
 --fish 20        # top 20 (only fish)
 --working        # only working commands
 --broken         # only non-working commands
