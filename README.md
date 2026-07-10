@@ -45,6 +45,15 @@
 
 ###   Установка
 
+
+**Через AUR:**
+
+Если установлен `yay`:
+
+```bash
+yay -S cmdflow
+```
+
 **Через GitHub:**
 
 ```bash
@@ -53,14 +62,6 @@ cd cmdflow
 cargo build --release
 mkdir -p ~/.local/bin
 ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
-```
-
-**Через AUR:**
-
-Если установлен `yay`:
-
-```bash
-yay -S cmdflow
 ```
 
 Будет собрана свежая версия проекта через Cargo.  
