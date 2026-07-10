@@ -65,7 +65,6 @@ mkdir -p ~/.local/bin
 ln -sf "$(pwd)/target/release/cmdflow" ~/.local/bin/cmdflow
 ```
 
-Будет собрана свежая версия проекта через Cargo.  
 
 ---
 
