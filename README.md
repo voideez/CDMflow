@@ -54,6 +54,7 @@
 yay -S cmdflow
 ```
 
+
 **Через GitHub:**
 
 ```bash
