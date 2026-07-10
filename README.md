@@ -10,9 +10,7 @@
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge&logo=opensourcehardware" alt="License">
 </p>
 
-A colorful Fish/Bash/Zsh command tracker with rainbow top visualization 
-
-`cmdflow` — это утилита для Linux, которая подсчитывает ваши команды Fish/Bash/Zsh, создаёт топ-N команд и выводит его в терминал.
+`cmdflow` — это CLI утилита для Linux, которая подсчитывает ваши команды Fish/Bash/Zsh, создаёт топ-N команд и выводит его в терминал.
 
 - Автокеширование команд при каждом запуске  
 - Поддержка старых и новых команд  
@@ -23,7 +21,7 @@ A colorful Fish/Bash/Zsh command tracker with rainbow top visualization
 
 ###   Функционал
 
-- Считает все введённые команды Fish и Bash, включая их повторы  
+- Считает все введённые команды Fish, Bash и Zsh, включая их повторы  
 - Берёт только первые аргументы команд (например, `cargo build` → `cargo`)  
 - Команды — радужная градиентная аллея  
 - Автоматически обновляет лог при каждом запуске  
