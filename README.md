@@ -28,7 +28,7 @@ cmdflow is a CLI utility for Linux that counts your Fish/Bash/Zsh commands, gene
 - Renders commands in a vibrant rainbow gradient alley
 - Automatically updates logs on every execution
 
-**Example output for cmdflow --working 50:**
+**Example output for ``cmdflow --working 50``:**
 ![](img/output.png)
 ---
 
