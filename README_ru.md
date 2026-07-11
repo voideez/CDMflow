@@ -10,7 +10,10 @@
   <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge&logo=opensourcehardware" alt="License">
 </p>
 
-`cmdflow` — это CLI утилита для Linux, которая подсчитывает ваши команды Fish/Bash/Zsh, создаёт топ-N команд и выводит его в терминал.
+
+## [English README.md](README.md)
+
+cmdflow — это CLI утилита для Linux, которая подсчитывает ваши команды Fish/Bash/Zsh, создаёт топ-N команд и выводит его в терминал.
 
 - Автокеширование команд при каждом запуске  
 - Поддержка старых и новых команд  
