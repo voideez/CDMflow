@@ -167,6 +167,16 @@ fn print_top(title: &str, data: &[(String, usize)], top_n: usize) {
 
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
+    const FLAGS: &[(&str, &str)] = &[
+        ("--fish", "Read only fish commands"),
+        ("--bash", "Read only bash commands"),
+        ("--zsh", "Read only zsh commands"),
+        ("--working", "Show top N working commands"),
+        ("--broken", "Show top N broken commands"),
+        ("--fix-history", "Inject duplicate-saving hooks into shell configs"),
+        ("--version", "Show program version"),
+        ("--help", "Show this help message"),
+    ];
 
     let home = match dirs::home_dir() {
         Some(h) => h,
@@ -176,14 +186,17 @@ fn main() {
     // Обработка системных флагов
     if args.iter().any(|a| a == "--help") {
         println!("Usage:");
-        println!("  --fish          Read only fish commands");
-        println!("  --bash          Read only bash commands");
-        println!("  --zsh           Read only zsh commands");
-        println!("  --working       Show top N working commands");
-        println!("  --broken        Show top N broken commands");
-        println!("  --fix-history   Inject duplicate-saving hooks into shell configs");
-        println!("  --version       Show program version");
-        println!("  --help          Show this help message");
+        for (flag, description) in FLAGS {
+            println!("  {:<14} {}", flag, description);
+        }
+        return;
+    }
+
+    if let Some(unknown) = args.iter().find(|a| {
+        a.starts_with('-') && !FLAGS.iter().any(|(flag, _)| flag == &a.as_str())
+    }) {
+        eprintln!("Unknown option: {}", unknown);
+        eprintln!("Use --help for usage.");
         return;
     }
 
