@@ -201,7 +201,7 @@ fn main() {
     }
 
     if args.iter().any(|a| a == "--version") {
-        println!("cmdflow v3.0.0");
+        println!("cmdflow v{}", env!("CARGO_PKG_VERSION"));
         return;
     }
 
