@@ -74,23 +74,23 @@ fn is_working(cmd: &str) -> bool {
 }
 
 fn fix_shell_histories(home: &std::path::Path) {
-    println!("{}", ":: Проверка конфигураций шеллов...".bold().blue());
+    println!("{}", ":: Checking shell configurations...".bold().blue());
 
-    // Настройка Bash
+    // Bash Configuration
     let bashrc_path = home.join(".bashrc");
     if bashrc_path.exists() {
         if let Ok(content) = read_to_string(&bashrc_path) {
             if !content.contains("export HISTCONTROL=") {
                 let mut file = OpenOptions::new().append(true).open(&bashrc_path).unwrap();
                 let _ = writeln!(file, "\n# Added by cmdflow\nexport HISTCONTROL=\nexport PROMPT_COMMAND=\"history -a; $PROMPT_COMMAND\"");
-                println!("✓ Настройки Bash обновлены в ~/.bashrc");
+                println!("✓ Bash settings updated in ~/.bashrc");
             } else {
-                println!("✓ В ~/.bashrc настройки уже заданы.");
+                println!("✓ Settings are already configured in ~/.bashrc");
             }
         }
     }
 
-    // Настройка Fish
+    // Fish Configuration
     let fish_config_path = home.join(".config/fish/config.fish");
     if fish_config_path.exists() {
         if let Ok(content) = read_to_string(&fish_config_path) {
@@ -103,14 +103,14 @@ function history_merge_on_enter --on-event fish_postexec
 end
 "#;
                 let _ = writeln!(file, "{}", fish_hook);
-                println!("✓ В ~/.config/fish/config.fish добавлен хук записи истории");
+                println!("✓ History recording hook added to ~/.config/fish/config.fish");
             } else {
-                println!("✓ В config.fish хук уже присутствует.");
+                println!("✓ Hook is already present in config.fish");
             }
         }
     }
 
-    // Настройка Zsh
+    // Zsh Configuration
     let zshrc_path = home.join(".zshrc");
     if zshrc_path.exists() {
         if let Ok(content) = read_to_string(&zshrc_path) {
@@ -125,14 +125,14 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 "#;
                 let _ = writeln!(file, "{}", zsh_hook);
-                println!("✓ Настройки Zsh обновлены в ~/.zshrc");
+                println!("✓ Zsh settings updated in ~/.zshrc");
             } else {
-                println!("✓ В ~/.zshrc настройки уже заданы.");
+                println!("✓ Settings are already configured in ~/.zshrc");
             }
         }
     }
     
-    println!("\n{}", "Готово! Перезапусти терминалы, чтобы изменения вступили в силу.".green().bold());
+    println!("\n{}", "Done! Please restart your terminals for changes to take effect.".green().bold());
 }
 
 fn print_top(title: &str, data: &[(String, usize)], top_n: usize) {
@@ -183,7 +183,7 @@ fn main() {
         None => { eprintln!("Could not determine home directory."); return; }
     };
 
-    // Обработка системных флагов
+    // Process system flags
     if args.iter().any(|a| a == "--help") {
         println!("Usage:");
         for (flag, description) in FLAGS {
@@ -210,7 +210,7 @@ fn main() {
         return;
     }
 
-    // Инициализация флагов шеллов
+    // Initialize shell flags
     let has_fish = args.contains(&"--fish".to_string());
     let has_bash = args.contains(&"--bash".to_string());
     let has_zsh = args.contains(&"--zsh".to_string());
@@ -222,7 +222,7 @@ fn main() {
 
     let top_n: usize = args.iter().filter_map(|a| a.parse::<usize>().ok()).next().unwrap_or(10);
 
-    // Пути к файлам истории
+    // Paths to history files
     let fish_history = home.join(".local/share/fish/fish_history");
     let bash_history = home.join(".bash_history");
     let zsh_history = home.join(".zsh_history");
@@ -245,7 +245,7 @@ fn main() {
     if use_bash { rebuild_log(&bash_history, &bash_log, "bash"); }
     if use_zsh { rebuild_log(&zsh_history, &zsh_log, "zsh"); }
 
-    // Подсчет команд
+    // Count commands
     let mut counter: HashMap<String, usize> = HashMap::new();
     let mut combined_logs = vec![];
     
@@ -268,7 +268,7 @@ fn main() {
         return;
     }
 
-    // Сортировка и фильтрация
+    // Sorting and filtering
     let mut vec_main: Vec<_> = counter.iter().map(|(cmd, &c)| (cmd.clone(), c)).collect();
 
     if args.contains(&"--working".to_string()) {
@@ -279,7 +279,7 @@ fn main() {
 
     vec_main.sort_by(|a, b| b.1.cmp(&a.1));
 
-    // Вывод результатов
+    // Output results
     let mut active_shells = Vec::new();
     if use_fish { active_shells.push("fish"); }
     if use_bash { active_shells.push("bash"); }
